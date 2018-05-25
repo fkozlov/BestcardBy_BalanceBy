@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<repository version="1">
+    <category id="repo_dev" name="Development" prefix="dev">
+        <subcaterogy id="repo_dev_sd" name="SD" prefix="tel">
+            <provider id="100001" name="Моцная Картка" type="xml" icon="bestcard_by" xml="bestcard_by"/>
+        </subcaterogy>
+    </category>
+</repository>

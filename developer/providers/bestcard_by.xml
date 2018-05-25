@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<provider url="https://bestcard.by" minAPI="168"> 
+	<preference type="text" name="login" title="#login"/>
+	<preference type="password" name="password" title="#password"/>
+	<request type="POST" url="${provider.url}/login" required="true" onError="exception.unavailable" charset="UTF-8">
+		<header name="Accept-Encoding" value="gzip, deflate, br"/>
+		<header name="X-Requested-With" value="XMLHttpRequest"/>
+		<header name="Content-Type" value="application/x-www-form-urlencoded; charset=UTF-8"/>
+		<param name="username" value="${account.login}"/>
+		<param name="password" value="${account.password}"/>
+		
+		<request type="GET" url="${provider.url}/bonus" required="true" onError="exception.unavailable" charset="UTF-8">
+			<header name="Cookie" value="JSESSIONID=${cookie.JSESSIONID}; view=desktop; jv_enter_ts_MCXQs1lzPX=1519501250959; jv_visits_count_MCXQs1lzPX=1; jv_utm_MCXQs1lzPX=; jv_pages_count_MCXQs1lzPX=1"/>
+			<header name="Host" value="bestcard.by"/>
+			<header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.3; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0"/>
+			<header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+			<header name="Accept-Language" value="ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"/>
+			<header name="Connection" value="keep-alive"/>
+			<header name="Upgrade-Insecure-Requests" value="1"/>
+			<header name="Pragma" value="no-cache"/>
+			<header name="Cache-Control" value="no-cache"/>
+			
+			<search regex="&lt;div class=&quot;TotalScore&quot;&gt;(\d*)&lt;/div&gt;" group="1" required="true">
+				<balance units="b" value="${result.1}" name="баллы"/>
+			</search>
+
+			<search regex="СПЕЦПРЕДЛОЖЕНИЯ&lt;/a&gt;(\s*)&lt;span&gt;(\d*)&lt;/span&gt;" group="2" required="false">
+				<balance units="s" value="${result.1}" name="спецпредложения"/>
+			</search>
+
+		</request>
+
+		<request type="POST" url="${provider.url}/logout" charset="UTF-8">
+			<header name="Accept-Encoding" value="gzip, deflate, br"/>
+			<header name="X-Requested-With" value="XMLHttpRequest"/>
+			<header name="Cookie" value="JSESSIONID=${cookie.JSESSIONID}; view=desktop; jv_enter_ts_MCXQs1lzPX=1519501250959; jv_visits_count_MCXQs1lzPX=1; jv_utm_MCXQs1lzPX=; jv_pages_count_MCXQs1lzPX=2"/>
+		</request>
+	</request>
+</provider>
